@@ -22,7 +22,7 @@
   --color-next-btn: #ffb0ba;
 
   /* Fonts */
-  --fs1: 18.75rem;
+  --fs1: 8.75rem;
   --fs2: 6rem;
   --fs3: 1.4rem;
   --fs4: 1.3rem;
@@ -223,9 +223,42 @@ a {
   margin: 0 3rem;
 }
 
+/* RESULT SECTION STYLING */
+.result-container {
+  background: url("../assets/imgs/result-bg.png") no-repeat center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  gap: 2.1875rem;
+}
+
+.result-container p,
+.result-container a {
+  color: #353535;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.result-container .score {
+  color: var(--color-white);
+  font-size: var(--fs1);
+}
+
 @media screen and (min-width: 768px) {
+  :root {
+    --fs1: 15.75rem;
+  }
+
   .choices li {
     inline-size: 35rem;
+  }
+
+  .result-container a,
+  .result-container p {
+    font-size: 3rem;
   }
 }
 
@@ -259,5 +292,10 @@ a {
   .letters {
     inline-size: 40px;
     block-size: 40px;
+  }
+
+  .result-container a,
+  .result-container p {
+    font-size: 3rem;
   }
 }

@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (currentQuestionIndex < quizQuestions.length) {
       renderCurrentQuestions();
     } else {
-      alert("Quiz has ended");
+      window.location.href = "results.html";
     }
   });
 
