@@ -109,6 +109,7 @@ a {
   display: grid;
   place-content: center;
   color: var(--color-black);
+  position: relative;
 }
 
 .ques-container {
@@ -144,7 +145,7 @@ a {
 .choices li {
   background: var(--color-white);
   box-shadow: 5px 9px 8.1px rgba(0, 0, 0, 0.1);
-  max-inline-size: 700px;
+  inline-size: 20rem;
   padding: 1.5rem 2rem;
   border-radius: 10px;
   display: flex;
@@ -202,6 +203,30 @@ a {
   box-shadow: 3.8px 7.7px 7.7px hsl(0deg 0% 0% / 0.38);
   background: var(--color-pink-dark);
   color: var(--color-white);
+}
+
+.modal {
+  position: absolute;
+  inset: 0;
+  background: rgba(51, 51, 51, 0.5);
+  box-shadow: 3.8px 7.7px 7.7px hsl(0deg 0% 0% / 0.38);
+  display: grid;
+  place-content: center;
+  display: none;
+}
+
+.modal-text {
+  background: #fff;
+  border-radius: 6px;
+  padding: 2rem 3rem;
+  font-size: 1.2rem;
+  margin: 0 3rem;
+}
+
+@media screen and (min-width: 768px) {
+  .choices li {
+    inline-size: 35rem;
+  }
 }
 
 @media screen and (min-width: 992px) {

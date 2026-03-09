@@ -1,9 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
   const questionNumber = document.getElementById("question-number");
-  const choices = document.getElementById("choices");
   const questionEl = document.getElementById("question");
+  const nextBtnEl = document.getElementById("next-btn");
 
   let currentQuestionIndex = 0;
+  let quizQuestions = [];
+  let score = 0;
 
   /* API URL */
   const APIURL =
@@ -22,26 +24,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const initQuiz = async () => {
     try {
-      const questions = await getData();
+      quizQuestions = await getData();
+      console.log("Quiz Data Loaded:", quizQuestions);
 
-      console.log(questions[0]);
-
-      showChoices(questions);
-      showQuestions(questions);
+      renderCurrentQuestions();
     } catch (err) {
       console.log(`Failed to fetch the questions: ${err}`);
     }
   };
 
+  function renderCurrentQuestions() {
+    showChoices(quizQuestions);
+    showQuestions(quizQuestions);
+  }
+
   /* FUNCTION TO DISPLAY THE QUESTIONS */
   function showQuestions(questions) {
     questionEl.textContent = questions[currentQuestionIndex].question["text"];
-    questionNumber.textContent = `Question ${(currentQuestionIndex += 1)}/ ${questions.length}`;
+
+    questionNumber.textContent = `Question ${currentQuestionIndex + 1}/ ${questions.length}`;
   }
 
   /* FUNCTION TO DISPLAY THE CHOICES DYNAMICALLY */
   function showChoices(questions) {
     const choicesItems = document.querySelectorAll(".choices li");
+
+    choicesItems.forEach((el) => el.classList.remove("active"));
 
     /* Generate an array of the choices */
     const choices = [
@@ -53,13 +61,22 @@ document.addEventListener("DOMContentLoaded", () => {
       const answerText = items.querySelector(".answers");
       answerText.textContent = choices[i];
 
-      items.onclick = () => {
+      items.onclick = (item) => {
         choicesItems.forEach((el) => el.classList.remove("active"));
-
         items.classList.add("active");
       };
     });
   }
+
+  nextBtnEl.addEventListener("click", () => {
+    currentQuestionIndex += 1;
+
+    if (currentQuestionIndex < quizQuestions.length) {
+      renderCurrentQuestions();
+    } else {
+      alert("Quiz is over");
+    }
+  });
 
   initQuiz();
 });
